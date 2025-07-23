@@ -107,6 +107,6 @@ audio-cnn-api/
 
 ## 🧠 About the Author
 
-This project was built as part of my transition into Machine Learning Engineering. I wanted to practice real-world ML deployment skills, including data ingestion, model serving, and API design.
+This project was built as part of my transition into AI/Machine Learning Engineering. I wanted to practice real-world ML deployment skills, including data ingestion, model serving, and API design.
 
 Feel free to reach out!
