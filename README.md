@@ -1,81 +1,121 @@
 # 🎷 Audio Classification API with CNN + FastAPI
 
-A lightweight, end-to-end audio classification system trained on the UrbanSound8K dataset. It uses MFCC spectrograms, a custom PyTorch CNN, and is deployed via a FastAPI web server with support for `.wav` file uploads.
+A lightweight, end-to-end audio classification system trained on the UrbanSound8K dataset. It uses MFCC spectrograms, a custom PyTorch CNN, and is deployed via a FastAPI web server with support for .wav file uploads.
 
 ## 🔍 What It Does
 
-* 🎹 Accepts `.wav` audio files via a POST endpoint
-* 📊 Converts audio into MFCC spectrograms
-* 🧠 Predicts one of 10 common urban sound classes using a trained CNN
-* ↺ Returns the predicted label as a JSON response
+🎹 Accepts .wav audio files via a POST endpoint
+📊 Converts audio into MFCC spectrograms
+🧠 Predicts one of 10 common urban sound classes using a trained CNN
+↺ Returns the predicted label as a JSON response
 
-## 🚀 How to Run It
+## 🔧 Features
 
-### 1. Clone the repo and install dependencies
+* Trains a simple CNN model using PyTorch
+* Uses MFCC audio features (via librosa)
+* REST API powered by FastAPI
+* Accepts `.wav` files as input
+* Returns predicted audio class (e.g., "dog\_bark", "siren")
+* Includes a `samples/` folder with demo audio files
+* Can be queried via FastAPI UI or `curl`
+
+## 🚀 Getting Started
+
+### 1. Clone the Repo
 
 ```bash
 git clone https://github.com/camillan/audio-cnn-api.git
 cd audio-cnn-api
+```
+
+### 2. Set Up Environment
+
+Use Conda:
+
+```bash
+conda create -n audio-env python=3.9 -y
+conda activate audio-env
+```
+
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 2. Train the model
+### 3. Download & Prepare Dataset
+
+We use the `soundata` library to load UrbanSound8K.
+Run:
 
 ```bash
 python train/train_cnn.py
 ```
 
-This will:
+This script will:
 
-* Download UrbanSound8K using `soundata`
-* Extract MFCCs
-* Train a CNN
-* Save the model to `model/cnn_model.pth` and `label_mapping.npy`
+* Download UrbanSound8K
+* Extract MFCC features
+* Train the CNN
+* Save model and label mappings to the `model/` directory
 
-### 3. Start the API server
+### 4. Run the API Server
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-Visit [http://localhost:8000/docs](http://localhost:8000/docs) to test it via Swagger UI.
+API will be available at: `http://localhost:8000`
 
----
+### 5. Try a Prediction
 
-## 🧪 Test with a Sample `.wav`
-
-Use any `.wav` from:
+Make sure the server is running, then in another terminal:
 
 ```bash
-~/sound_datasets/urbansound8k/audio/fold1/
+curl -X POST "http://localhost:8000/predict" \
+  -F "file=@samples/sample_000.wav"
 ```
 
-Or upload your own!
+Or go to `http://localhost:8000/docs` in your browser to use the FastAPI Swagger UI.
 
----
+### 6. Sample Files
 
-## 🛠️ Tech Stack
+We include a `samples/` folder with 100 randomly selected `.wav` files from UrbanSound8K for testing. These were copied from the dataset using:
 
-* `FastAPI` – API for real-time prediction
-* `PyTorch` – Lightweight CNN for MFCC classification
-* `librosa` – Audio preprocessing
-* `soundata` – UrbanSound8K dataset download & management
-* `numpy`, `scikit-learn` – Utilities
+```python
+import pathlib, random, shutil
+files = list(pathlib.Path('~/sound_datasets/urbansound8k/audio').expanduser().rglob('*.wav')) 
+sampled = random.sample(files, 100)
+pathlib.Path('samples').mkdir(exist_ok=True)
+for i, f in enumerate(sampled):
+    shutil.copy(f, f'samples/sample_{i:03}.wav')
+```
 
----
+## 📁 Project Structure
 
-## 💡 Ideas for Improvements
+```
+audio-cnn-api/
+├── app/
+│   ├── main.py          # FastAPI app
+│   └── model.py         # Model loading & prediction
+├── model/               # Saved model + label map
+├── samples/             # Sample audio files
+├── train/
+│   └── train_cnn.py     # Model training script
+├── requirements.txt
+└── README.md
+```
 
-* Add confidence scores or top-3 predictions
-* Add Streamlit/Gradio UI
-* Containerize with Docker
-* Deploy on Hugging Face Spaces or Render
-* Support other datasets or languages
+## 📣 Summary
 
----
+* Built a complete ML inference API using FastAPI
+* End-to-end flow: data loading, feature extraction, training, serialization, deployment
+* Lightweight approach: minimal dependencies, no cloud infra
+* Practiced model serving, curl-based testing, and audio-specific preprocessing
+* Included sample data for easy testing and reproducibility via both browser and CLI
 
 ## 🧠 About the Author
 
-This project was built as part of my transition into Machine Learning Engineering. It demonstrates real-world ML deployment skills, including data ingestion, model serving, and API design.
+This project was built as part of my transition into Machine Learning Engineering. I wanted to practice real-world ML deployment skills, including data ingestion, model serving, and API design.
 
-Feel free to fork or reach out!
+Feel free to reach out!
