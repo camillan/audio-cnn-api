@@ -80,16 +80,7 @@ Or go to `http://localhost:8000/docs` in your browser to use the FastAPI Swagger
 
 ### 6. Sample Files
 
-We include a `samples/` folder with 100 randomly selected `.wav` files from UrbanSound8K for testing. These were copied from the dataset using:
-
-```python
-import pathlib, random, shutil
-files = list(pathlib.Path('~/sound_datasets/urbansound8k/audio').expanduser().rglob('*.wav')) 
-sampled = random.sample(files, 100)
-pathlib.Path('samples').mkdir(exist_ok=True)
-for i, f in enumerate(sampled):
-    shutil.copy(f, f'samples/sample_{i:03}.wav')
-```
+We include a `samples/` folder with 100 randomly selected `.wav` files from UrbanSound8K for testing. These were copied from the dataset.
 
 ## 📁 Project Structure
 
