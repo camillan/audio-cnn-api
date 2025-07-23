@@ -4,10 +4,10 @@ A lightweight, end-to-end audio classification system trained on the UrbanSound8
 
 ## 🔍 What It Does
 
-🎹 Accepts .wav audio files via a POST endpoint
-📊 Converts audio into MFCC spectrograms
-🧠 Predicts one of 10 common urban sound classes using a trained CNN
-↺ Returns the predicted label as a JSON response
+* Accepts .wav audio files via a POST endpoint
+* Converts audio into MFCC spectrograms
+* Predicts one of 10 common urban sound classes using a trained CNN
+* Returns the predicted label as a JSON response
 
 ## 🔧 Features
 
