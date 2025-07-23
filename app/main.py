@@ -4,6 +4,10 @@ from app.model import predict_mfcc_tensor
 
 app = FastAPI()
 
+@app.get("/")
+def read_root():
+    return {"status": "ok", "message": "Audio classifier is running"}
+
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     audio_bytes = await file.read()
