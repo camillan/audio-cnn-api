@@ -21,15 +21,6 @@ A lightweight, end-to-end audio classification system trained on the UrbanSound8
 
 ## 🚀 Getting Started
 
-### 🐳 Docker Support
-You can run this project entirely in Docker — no Conda or manual setup needed.
-
-Build the docker image.
-```docker build -t audio-api .```
-
-Run the API server.
-```docker run -p 8000:8000 audio-api```
-
 ### 1. Clone the Repo
 
 ```bash
@@ -90,6 +81,17 @@ Or go to `http://localhost:8000/docs` in your browser to use the FastAPI Swagger
 ### 6. Sample Files
 
 We include a `samples/` folder with 100 randomly selected `.wav` files from UrbanSound8K for testing. These were copied from the dataset.
+
+## 🐳 Docker (Optional)
+
+To run the API in a Docker container:
+
+1. Make sure Docker is installed and running.
+2. In the project root, run:
+
+```bash
+docker-compose up --build
+```
 
 ## 📁 Project Structure
 
