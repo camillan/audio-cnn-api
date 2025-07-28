@@ -82,6 +82,17 @@ Or go to `http://localhost:8000/docs` in your browser to use the FastAPI Swagger
 
 We include a `samples/` folder with 100 randomly selected `.wav` files from UrbanSound8K for testing. These were copied from the dataset.
 
+## 🐳 Docker (Optional)
+
+To run the API in a Docker container:
+
+1. Make sure Docker is installed and running.
+2. In the project root, run:
+
+```bash
+docker-compose up --build
+```
+
 ## 📁 Project Structure
 
 ```
